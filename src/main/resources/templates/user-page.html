@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>User Page</title>
+</head>
 <body>
-<h2>User Information</h2>
-<br>
+<br/>
 
-<form th:method="POST" th:action="@{/saveUser}" th:object="${user}">
+<form th:object="${user}">
     <div>
         <label for="firstName">Name</label>
         <input type="text" th:field="*{firstName}" id="firstName"/>
@@ -28,12 +29,14 @@
 
         <br>
 
-        <input type="submit" value="Add User">
-
     </div>
+
+    <br/>
+
+    <input type="button" value="Logout"
+           onclick="window.location.href ='logout'"/>
 
 </form>
 
 </body>
-
 </html>

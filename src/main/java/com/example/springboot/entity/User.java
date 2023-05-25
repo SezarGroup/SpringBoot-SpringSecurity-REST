@@ -1,6 +1,6 @@
 package com.example.springboot.entity;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "users")
@@ -18,12 +18,26 @@ public class User {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "role")
+    private String role;
+
     public User() {}
 
     public User(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
+    }
+
+    public User(String firstName, String lastName, String email, String password, String role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.role = role;
     }
 
     public int getId() {
@@ -58,10 +72,28 @@ public class User {
         this.email = email;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     @Override
     public String toString() {
         return "firstName: " + firstName + ", " +
                 "lastName: " + lastName + ", " +
-                "email: " + email;
+                "email: " + email + ", " +
+                "password: " + password + ", " +
+                "role: " + role;
     }
 }
