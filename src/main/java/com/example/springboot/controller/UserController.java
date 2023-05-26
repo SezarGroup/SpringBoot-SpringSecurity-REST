@@ -25,6 +25,8 @@ public class UserController {
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("users", allUsers);
+        User user = new User();
+        model.addAttribute("user", user);
         return "users";
     }
 
