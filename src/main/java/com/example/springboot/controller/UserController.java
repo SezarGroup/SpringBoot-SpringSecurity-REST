@@ -1,8 +1,11 @@
 package com.example.springboot.controller;
 
 import com.example.springboot.entity.User;
+import com.example.springboot.security.PersonDetails;
 import com.example.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +25,27 @@ public class UserController {
     public String showAllUsers(Model model) {
         List<User> allUsers = userService.getAllUsers();
         model.addAttribute("users", allUsers);
+        User user = new User();
+        model.addAttribute("user", user);
         return "users";
+    }
+
+    @RequestMapping("/user-info")
+    public String showUserInfo(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
+        User user = personDetails.getUser();
+        model.addAttribute("user", user);
+        return "user-page";
+    }
+
+    @RequestMapping("/user-page")
+    public String showUserPage(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        PersonDetails personDetails = (PersonDetails) authentication.getPrincipal();
+        User user = personDetails.getUser();
+        model.addAttribute("user", user);
+        return "user-page";
     }
 
     @RequestMapping("/addNewUser")
